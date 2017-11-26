@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Aspnet.Mvc" Version="5.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Moq" Version="4.1.1309.1617" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+    <PackageReference Include="Ninject" Version="3.0.1.10" />
+    <PackageReference Include="Ninject.MVC3" Version="3.0.0.6" />
+    <PackageReference Include="Ninject.Web.Common" Version="3.0.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FShop.DAL\FShop.DAL.csproj" />
+    <ProjectReference Include="..\Fshop\Fshop.csproj" />
+  </ItemGroup>
+
+</Project>
