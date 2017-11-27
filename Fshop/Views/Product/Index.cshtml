@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "product_list",
+    };
 }
 
 <p>
@@ -10,12 +14,20 @@
 
 <div class="container">
     <div class="row" style="margin-bottom:10px">
+
         @Html.ActionLink("6", "Index", "Product", new { ProdType =ViewBag.ProdType,Page=ViewBag.Page, ProdOnPage = 6 }, new { @class="btn btn-info btn-lg", @style="min-width:60px; border-top-left-radius:50px" })
         @Html.ActionLink("9", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 9 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
         @Html.ActionLink("12", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 12 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
         @Html.ActionLink("15", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 15 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-top-right-radius:50px " })
+
+        <div>
+            <div class="row" id="product_list">
+                @Html.Action("Prod_List")
+            </div>
+        </div>
+
     </div>
-        <div class="row">
+        @*<div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-4 card" style="padding:5px; background-color:antiquewhite">
@@ -28,5 +40,11 @@
                     </div>
                 </div>
             }
-        </div>
-    </div>
+        </div>*@
+  </div>
+<div class="btn-group">
+   @for (int i = 0; i < ViewBag.Count; i++)
+   {
+    @Ajax.ActionLink((@i+1).ToString(), "Prod_List", "Product", new { ProdType = ViewBag.ProdType,  ProdOnPage = ViewBag.ProdOnPage, Page = @i+1 },options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-radius:50px" })
+   }
+</div>

@@ -10,5 +10,6 @@ namespace FShop.DB
     public interface IProductRepository
     {
         IEnumerable<Product> Products { get; }
+        //int GetCount(string FishingType);
     }
 }

@@ -17,5 +17,7 @@ namespace FShop.DB
                 return context.Product;
             }
         }
+
+        
     }
 }
