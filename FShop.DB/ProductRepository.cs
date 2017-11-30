@@ -10,11 +10,18 @@ namespace FShop.DB
     public class ProductRepository : IProductRepository
     {
         FShopContext context = new FShopContext();
-        public IEnumerable<Product> Products
+
+        static List<Product> prod;
+        public ProductRepository()
+        {
+            if(prod==null)
+                prod = context.Product.ToList();
+        }
+        public List<Product> Products
         {
             get
             {
-                return context.Product;
+                return prod;
             }
         }
 

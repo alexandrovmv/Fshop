@@ -35,11 +35,16 @@ namespace Fshop.Controllers
 
             }
             ViewBag.Count = Math.Ceiling((decimal)count/ProdOnPage);
+            if (Math.Ceiling((decimal)count / ProdOnPage) < Page) ViewBag.Page = Math.Ceiling((decimal)count / ProdOnPage) < Page;
             return View(products);
          
         }
         public PartialViewResult Prod_List(string ProdType, int ProdOnPage = 3, int Page = 1)
         {
+            ViewBag.ProdType = ProdType;
+            ViewBag.ProdOnPage = ProdOnPage;
+            ViewBag.Page = Page;
+
             IEnumerable<FShop.DB.DB.Product> products;
             int count = 0;
             if (!string.IsNullOrEmpty(ProdType))

@@ -15,6 +15,14 @@ select,
 textarea {
     max-width: 280px;
 }
+.btn-edit{
+    min-width:100px;
+  
+    border-radius:25px;
+}
+.btn-remove{
+  margin:5px;
+}
 
 
 

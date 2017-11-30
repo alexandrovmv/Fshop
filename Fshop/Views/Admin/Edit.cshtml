@@ -1,0 +1,18 @@
+﻿@model FShop.DB.DB.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+   
+    <input type="hidden" value="@Model.ProductID" />
+     <input type="text" value="@Model.Name"/>
+    <input type="text" value="@Model.Description" />
+    <input type="text" value="@Model.Price"/>
+    <input type="text" value="@Model.Category" />
+    <input type="text" value="@Model.Category" />
+    <input type="file" name="fileUpload" /><br />
+     <input type="submit" name="Submit" id="SubmitSingle" value="Upload" />
+}

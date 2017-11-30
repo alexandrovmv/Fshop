@@ -7,44 +7,44 @@
         UpdateTargetId = "product_list",
     };
 }
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Ajax.ActionLink("Fishing Shop", "Prod_List", "Product", new { area = "" }, options, new { @class = "navbar-brand" })
+            @Ajax.ActionLink("Спиннинг", "Prod_List", "Product", new { ProdType = "Спиннинговые удилища" }, options, new { @class = "navbar-brand" })
+            @Ajax.ActionLink("Фидер", "Prod_List", "Product", new { ProdType = "Фидерные удилища" }, options, new { @class = "navbar-brand" })
+            @Ajax.ActionLink("Болонки", "Prod_List", "Product", new { ProdType = "Болонские удилища" }, options, new { @class = "navbar-brand" })
+            @Ajax.ActionLink("Карповые", "Prod_List", "Product", new { ProdType = "Карповые удилища" }, options, new { @class = "navbar-brand" })
+            @Ajax.ActionLink("Сигнализаторы", "Prod_List", "Product", new { ProdType = "Электронные сигнализаторы" }, options, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+</div>
+<div style="height:50px">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+</div>
 
 <div class="container">
     <div class="row" style="margin-bottom:10px">
-
-        @Html.ActionLink("6", "Index", "Product", new { ProdType =ViewBag.ProdType,Page=ViewBag.Page, ProdOnPage = 6 }, new { @class="btn btn-info btn-lg", @style="min-width:60px; border-top-left-radius:50px" })
-        @Html.ActionLink("9", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 9 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
-        @Html.ActionLink("12", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 12 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
-        @Html.ActionLink("15", "Index", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 15 }, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-top-right-radius:50px " })
-
+      
+        @Ajax.ActionLink("6", "Prod_List", "Product", new { ProdType =ViewBag.ProdType,Page=ViewBag.Page, ProdOnPage = 6 }, options,new { @class="btn btn-info btn-lg", @style="min-width:60px; border-top-left-radius:50px" })
+        @Ajax.ActionLink("9", "Prod_List", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 9 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
+        @Ajax.ActionLink("12", "Prod_List", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 12 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
+        @Ajax.ActionLink("15", "Prod_List", "Product", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 15 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-top-right-radius:50px " })
+        
         <div>
             <div class="row" id="product_list">
                 @Html.Action("Prod_List")
             </div>
         </div>
-
     </div>
-        @*<div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-4 card" style="padding:5px; background-color:antiquewhite">
-                    <img class="card-img-top" src=@item.Photo alt="Card image" height="250">
-                    <div class="card-block">
-                        <h4 class="card-title">@item.Name</h4>
-                        <h6 class="card-subtitle"></h6>
-                        <p class="card-text">@item.Description</p>
-                        <p class="card-text">Цена: @item.Price</p>
-                    </div>
-                </div>
-            }
-        </div>*@
+
   </div>
-<div class="btn-group">
-   @for (int i = 0; i < ViewBag.Count; i++)
-   {
-    @Ajax.ActionLink((@i+1).ToString(), "Prod_List", "Product", new { ProdType = ViewBag.ProdType,  ProdOnPage = ViewBag.ProdOnPage, Page = @i+1 },options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-radius:50px" })
-   }
-</div>
+
