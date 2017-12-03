@@ -10,22 +10,28 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Ajax.ActionLink("Fishing Shop", "Prod_List", "Product", new { area = "" }, options, new { @class = "navbar-brand" })
-            @Ajax.ActionLink("Спиннинг", "Prod_List", "Product", new { ProdType = "Спиннинговые удилища" }, options, new { @class = "navbar-brand" })
-            @Ajax.ActionLink("Фидер", "Prod_List", "Product", new { ProdType = "Фидерные удилища" }, options, new { @class = "navbar-brand" })
-            @Ajax.ActionLink("Болонки", "Prod_List", "Product", new { ProdType = "Болонские удилища" }, options, new { @class = "navbar-brand" })
-            @Ajax.ActionLink("Карповые", "Prod_List", "Product", new { ProdType = "Карповые удилища" }, options, new { @class = "navbar-brand" })
-            @Ajax.ActionLink("Сигнализаторы", "Prod_List", "Product", new { ProdType = "Электронные сигнализаторы" }, options, new { @class = "navbar-brand" })
+    
+            <div class="button-group">
+                @Ajax.ActionLink("Fishing Shop", "Prod_List", "Product", new { area = "" }, options, new { @class = "navbar-brand" })
+                @Ajax.ActionLink("Спиннинг", "Prod_List", "Product", new { ProdType = "Спиннинговые удилища" }, options, new { @class = "navbar-brand" })
+                @Ajax.ActionLink("Фидер", "Prod_List", "Product", new { ProdType = "Фидерные удилища" }, options, new { @class = "navbar-brand" })
+                @Ajax.ActionLink("Болонки", "Prod_List", "Product", new { ProdType = "Болонские удилища" }, options, new { @class = "navbar-brand" })
+                @Ajax.ActionLink("Карповые", "Prod_List", "Product", new { ProdType = "Карповые удилища" }, options, new { @class = "navbar-brand" })
+                @Ajax.ActionLink("Сигнализаторы", "Prod_List", "Product", new { ProdType = "Электронные сигнализаторы" }, options, new { @class = "navbar-brand" })
+                @Html.ActionLink("Контакты", "Contats")
+                <div style="font-size:x-large">@ViewBag.UId</div>
+            </div>
+            
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav"></ul>
+       
+        <div class="Bucket">
+            @Html.Action("GetPoductCount");
+          
+            @Html.ActionLink("Войти","LogIn", "Authorise",new { } ,new { @class = "navbar-brand pull-right" });
+            @Html.ActionLink("Регистрация", "Registr", "Authorise",  new { }, new { @class = "navbar-brand pull-right" });
         </div>
     </div>
+ 
 </div>
 <div style="height:50px">
 

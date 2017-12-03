@@ -1,0 +1,42 @@
+﻿@model Fshop.Models.Cart
+@using Fshop.Models
+<div style="margin-bottom:10px">
+    @Html.ActionLink("Go Home", "Index", "Product", new { @class = "btn btn-primary pull-right" })
+</div>
+
+<table class="table">
+    <thead class="thead-inverse">
+        <tr>
+           
+            <th>#</th>
+            <th class="hidden">Id</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Итого</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Check.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td class="hidden">@Model.Check[i].product.ProductID</td>
+                <td>@Model.Check[i].product.Name</td>
+                <td>@Model.Check[i].product.Price</td>
+                <td>@Model.Check[i].Count</td>
+                <td>@Model.Check[i].Cost</td>
+            </tr>
+        }
+        
+        <tr class="info">
+            <th scope="row">Итого</th>
+            <td class="hidden"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th scope="row">@Model.Cost</th>
+</tr>
+  </tbody>
+</table>

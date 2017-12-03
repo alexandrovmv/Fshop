@@ -30,6 +30,22 @@ namespace Fshop.Controllers
             Product p = repository.Products.FirstOrDefault(x => x.ProductID == id);
             return View(p);
         }
+        [HttpPost]
+        public ActionResult Edit(Product EditedProduct)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
+                p.Price = EditedProduct.Price;
+                p.Name = EditedProduct.Name;
+                p.Photo = EditedProduct.Photo;
+                p.Description = EditedProduct.Description;
+                p.Category = EditedProduct.Category;
+                return RedirectToAction("index");
+            }
+            return View(EditedProduct);
+        }
 
         public PartialViewResult GetProductList(int Page = 1, int ProdOnPage = 5)
         {

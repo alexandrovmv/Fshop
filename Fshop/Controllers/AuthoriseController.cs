@@ -54,6 +54,7 @@ namespace Fshop.Controllers
                 GetAuthenticationManager().SignIn(identity);
                 return RedirectToAction("Login", "Authorise");
             }
+
             ModelState.AddModelError("", "Invalid email or password");
             return View(model);
         }
@@ -86,15 +87,22 @@ namespace Fshop.Controllers
             }
 
             var user = userManager.Find(model.Email, model.Password);
+            var identity = userManager.CreateIdentity(
+                         user, DefaultAuthenticationTypes.ApplicationCookie);
 
-            if (user != null)
-            {
-                var identity = userManager.CreateIdentity(
-                    user, DefaultAuthenticationTypes.ApplicationCookie);
-
-                GetAuthenticationManager().SignIn(identity);
-                return RedirectToAction("Index", "Admin");
+            GetAuthenticationManager().SignIn(identity);
+            if (user != null){
+                if( user.Email == "a@gmail.com")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Product");
+                }
+              
             }
+            
             ModelState.AddModelError("", "Invalid email or password");
             return View(model);
         }

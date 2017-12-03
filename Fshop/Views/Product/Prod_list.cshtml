@@ -9,12 +9,16 @@
     @foreach (var item in Model)
             {
         <div class="col-4 card" style="padding:5px; background-color:antiquewhite">
+            <div class="hide">@item.ProductID</div>
             <img class="card-img-top" src=@item.Photo alt="Card image" height="250">
             <div class="card-block">
                 <h4 class="card-title">@item.Name</h4>
                 <h6 class="card-subtitle"></h6>
                 <p class="card-text">@item.Description</p>
                 <p class="card-text">Цена: @item.Price</p>
+                <div>
+                    @Ajax.ActionLink("В корзину!","AddProduct",new {prodId=item.ProductID},new AjaxOptions {UpdateTargetId= "Bucket"})
+                </div>
             </div>
         </div>
     }

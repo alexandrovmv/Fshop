@@ -8,7 +8,7 @@ namespace FShop.DB.DB
     public partial class FShopContext : DbContext
     {
         public FShopContext()
-            : base("name=FShopContextWork")
+            : base("name=FShopContext")
         {
         }
 
