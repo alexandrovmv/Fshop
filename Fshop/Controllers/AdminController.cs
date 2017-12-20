@@ -16,6 +16,7 @@ namespace Fshop.Controllers
         public AdminController(IProductRepository repo)
         {
             repository = repo;
+            Console.WriteLine();
         }
       
         public ActionResult Index(int Page=1, int ProdOnPage=3)
