@@ -17,7 +17,7 @@
                 <p class="card-text">@item.Description</p>
                 <p class="card-text">Цена: @item.Price</p>
                 <div>
-                    @Ajax.ActionLink("В корзину!","AddProduct",new {prodId=item.ProductID},new AjaxOptions {UpdateTargetId= "Bucket"})
+                    @Ajax.ActionLink("В корзину!","AddProduct",new {prodId=item.ProductID},new AjaxOptions {UpdateTargetId= "Bucket" })
                 </div>
             </div>
         </div>

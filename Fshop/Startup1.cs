@@ -16,18 +16,6 @@ namespace Fshop
     using System.IO;
     using System.Web;
     using AppFunc = Func<IDictionary<string, object>, Task>;
-    public class MyModule1 : OwinMiddleware
-    {
-        public MyModule1(OwinMiddleware mid) : base(mid) { }
-        public override Task Invoke(IOwinContext context)
-        {
-            RequestCookieCollection cool = context.Request.Cookies;
-            if ((cool["Auth"] == null) && (context.Request.Path.ToString().EndsWith("ecret")))
-                return context.Response.WriteAsync("<h1>Hey!!</h1>");
-            return Next.Invoke(context);
-
-        }
-    }
     public class Startup1
     {
         public static Func<UserManager<AppUser, int>> UserManagerFactory { get; private set; }
@@ -42,6 +30,7 @@ namespace Fshop
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Authorise/login")
             });
+      
             UserManagerFactory = () =>
             {
                 var usermanager = new UserManager<AppUser, int>(
@@ -51,6 +40,8 @@ namespace Fshop
                 {
                     AllowOnlyAlphanumericUserNames = false
                 };
+               
+                
 
                 return usermanager;
             };

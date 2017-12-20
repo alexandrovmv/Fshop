@@ -200,6 +200,7 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\LogInModel.cs" />
+    <Compile Include="Models\Shop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup1.cs" />
   </ItemGroup>
@@ -219,6 +220,10 @@
     <Content Include="Views\Authorise\Registr.cshtml" />
     <Content Include="Views\Product\GetPoductCount.cshtml" />
     <Content Include="Views\Product\Bucket.cshtml" />
+    <Content Include="Views\Product\Contats.cshtml" />
+    <Content Include="Views\Product\Map.cshtml" />
+    <Content Include="Views\Product\AddProduct.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -28,24 +28,55 @@ namespace Fshop.Controllers
         public ActionResult Edit(int id)
         {
             Product p = repository.Products.FirstOrDefault(x => x.ProductID == id);
+            if (p == null) p = new Product { ProductID = id };
             return View(p);
         }
         [HttpPost]
         public ActionResult Edit(Product EditedProduct)
-        {
+        {        
             if (ModelState.IsValid)
             {
-
-                Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
-                p.Price = EditedProduct.Price;
-                p.Name = EditedProduct.Name;
-                p.Photo = EditedProduct.Photo;
-                p.Description = EditedProduct.Description;
-                p.Category = EditedProduct.Category;
+                if (EditedProduct.ProductID > repository.Products.Last().ProductID)
+                {
+                    repository.Products.Add(EditedProduct);
+                }
+                else
+                {
+                    Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
+                    p.Price = EditedProduct.Price;
+                    p.Name = EditedProduct.Name;
+                    p.Photo = EditedProduct.Photo;
+                    p.Description = EditedProduct.Description;
+                    p.Category = EditedProduct.Category;
+                }
+               
                 return RedirectToAction("index");
             }
             return View(EditedProduct);
         }
+        public ActionResult AddProduct()
+        {
+            int newId = repository.Products[repository.Products.Count-1].ProductID + 1;
+            return RedirectToAction("Edit",new { id = newId});
+        }
+        //[HttpPost]
+        //public ActionResult AddProduct(Product NewProduct)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
+        //        p.Price = EditedProduct.Price;
+        //        p.Name = EditedProduct.Name;
+        //        p.Photo = EditedProduct.Photo;
+        //        p.Description = EditedProduct.Description;
+        //        p.Category = EditedProduct.Category;
+        //        return RedirectToAction("index");
+        //    }
+        //    return View(EditedProduct);
+        //}
+
 
         public PartialViewResult GetProductList(int Page = 1, int ProdOnPage = 5)
         {

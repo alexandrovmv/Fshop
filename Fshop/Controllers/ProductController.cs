@@ -1,5 +1,6 @@
 ﻿using Fshop.Models;
 using FShop.DB;
+using FShop.DB.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,6 @@ namespace Fshop.Controllers
         // GET: Product
         public ActionResult Index(string ProdType,int ProdOnPage=3,int Page=1)
         {
-            
             object UserId = Session["UId"];
             if ( !Session.IsNewSession)
             {
@@ -58,6 +58,7 @@ namespace Fshop.Controllers
             return View(products);
          
         }
+
         public ActionResult Map()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -81,6 +82,22 @@ namespace Fshop.Controllers
 
             return View();
         }
+        public JsonResult GetData()
+        {
+            // создадим список данных
+            List<Shop> stations = new List<Shop>();
+            stations.Add(new Shop()
+            {
+                Id = 1,
+                PlaceName = "Магазин Флагман",
+                GeoLat = 37.610489,
+                GeoLong = 55.752308,
+              
+            });
+        
+
+            return Json(stations, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Bucket(int id)
         {
             CurrentCart = Carts.FirstOrDefault(x=>x.UId==id);
@@ -88,19 +105,26 @@ namespace Fshop.Controllers
         }
         public ActionResult AddProduct(int prodId)
         {
-            CurrentCart = Carts.FirstOrDefault(x=>x.UId== Convert.ToInt32( Session["UId"]));
-            CartItem CI = CurrentCart.Check.FirstOrDefault(x=>x.product.ProductID==prodId);
-            if (CI == null)
+            CurrentCart = Carts.FirstOrDefault(x => x.UId == Convert.ToInt32(Session["UId"]));
+            if (prodId != 0)
             {
-                CurrentCart.Check.Add(
-                    new CartItem {
-                    product = repository.Products.FirstOrDefault(x=>x.ProductID==prodId),
-                    Count = 1 });                
+              
+                CartItem CI = CurrentCart.Check.FirstOrDefault(x => x.product.ProductID == prodId);
+                if (CI == null)
+                {
+                    CurrentCart.Check.Add(
+                        new CartItem
+                        {
+                            product = repository.Products.FirstOrDefault(x => x.ProductID == prodId),
+                            Count = 1
+                        });
+                }
+                else
+                    CI.Count++;
             }
-            else
-                CI.Count++;
+           
             ViewBag.ProductCount = CurrentCart.Check.Count;
-            return RedirectToAction("GetPoductCount");
+            return PartialView();
         }
 
         public PartialViewResult GetPoductCount() {
@@ -135,6 +159,48 @@ namespace Fshop.Controllers
           
 
             return PartialView(products);
+        }
+
+        //[HttpPost]
+        public ActionResult Remove(int? id = null)
+        {
+            CurrentCart = Carts.FirstOrDefault(x => x.UId == Convert.ToInt32(Session["UId"]));
+            if (ModelState.IsValid)
+            {
+                CartItem CI = CurrentCart.Check.FirstOrDefault(x => x.product.ProductID == id);
+                CurrentCart.Check.Remove(CI);
+                return RedirectToAction("Bucket",new { id = (int)Session["UId"] });
+            }
+            else
+                return View();
+        }
+        public ActionResult ClearBucket(){
+            CurrentCart = Carts.FirstOrDefault(x => x.UId == Convert.ToInt32(Session["UId"]));
+            CurrentCart.Check.Clear();
+            return RedirectToAction("Bucket", new { id = (int)Session["UId"] });
+        }
+
+        public ActionResult Edit(int id)
+        {
+            CurrentCart = Carts.FirstOrDefault(x => x.UId == Convert.ToInt32(Session["UId"]));
+            CartItem CI = CurrentCart.Check.FirstOrDefault(x => x.product.ProductID == id);
+         
+            return View(CI);
+        }
+        [HttpPost]
+        public ActionResult Edit(CartItem EditedCartItem)
+        {
+            CurrentCart = Carts.FirstOrDefault(x => x.UId == Convert.ToInt32(Session["UId"]));
+            if (ModelState.IsValid)
+            {
+           
+                    CartItem CI = CurrentCart.Check.FirstOrDefault(x => x.product.ProductID == EditedCartItem.product.ProductID);
+                CI.Count = EditedCartItem.Count;
+                
+
+                return RedirectToAction("index");
+            }
+            return View(EditedCartItem);
         }
     }
 
