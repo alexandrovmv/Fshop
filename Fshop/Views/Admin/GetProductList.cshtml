@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "product_list",
+    };
+}
+
+<table class="table table-hover">
+    <thead class="thead-inverse">
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Категория</td>
+            <td>Описание</td>
+            <td>Картинка</td>
+            <td>Цена</td>
+            <td style="min-height:150px">Действия</td>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="align-middle">@item.ProductID</td>
+        <td class="align-middle">@item.Name</td>
+        <td class="align-middle">@item.Category</td>
+        <td class="align-middle">@item.Description</td>
+        <td class="align-middle"><img class="card-img-top" src=@item.Photo alt="image" height="50"></td>
+        <td class="align-middle">@item.Price</td>
+        <td class="align-middle" >
+                @Html.RouteLink("Delete",new { controller = "Product",action="Remove", id=item.ProductID }, new { @class = "btn btn-danger btn-edit", style ="min-width:100px; margin-bottom:10px;" })
+                @Html.RouteLink("Edit", new { controller = "Product", action = "Edit", id = item.ProductID }, new { @class = " btn btn-warning btn-edit", style = "min-width:100px" })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="row">
+    <div class="btn-group" style="margin:10px">
+        @for (int i = 0; i < ViewBag.Count; i++)
+        {
+            @Ajax.ActionLink((@i + 1).ToString(), "GetProductList", "Admin", new { ProdType = ViewBag.ProdType, ProdOnPage = ViewBag.ProdOnPage, Page = @i + 1 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-radius:50px" })
+        }
+    </div>
+</div>
+
+
