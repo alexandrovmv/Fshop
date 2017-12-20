@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fshop", "Fshop\Fshop.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FShop.DB", "FShop.DB\FShop.DB.csproj", "{00C455DC-0011-4BFC-BF16-C958B061488C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Step.Identity", "..\MVC\Lesson 27 asp.net Identity\Step.Identity\Step.Identity.csproj", "{8447F73E-F8B7-4629-AF0E-0FCAAB18B0C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Step.Identity", "Step.Identity\Step.Identity.csproj", "{8447F73E-F8B7-4629-AF0E-0FCAAB18B0C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
