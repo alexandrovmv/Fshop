@@ -238,10 +238,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MVC\Lesson 27 asp.net Identity\Step.Identity\Step.Identity.csproj">
-      <Project>{8447f73e-f8b7-4629-af0e-0fcaab18b0c9}</Project>
-      <Name>Step.Identity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FShop.DB\FShop.DB.csproj">
       <Project>{00c455dc-0011-4bfc-bf16-c958b061488c}</Project>
       <Name>FShop.DB</Name>
