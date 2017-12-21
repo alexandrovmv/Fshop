@@ -242,6 +242,10 @@
       <Project>{00c455dc-0011-4bfc-bf16-c958b061488c}</Project>
       <Name>FShop.DB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Step.Identity\Step.Identity.csproj">
+      <Project>{8447f73e-f8b7-4629-af0e-0fcaab18b0c9}</Project>
+      <Name>Step.Identity</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
