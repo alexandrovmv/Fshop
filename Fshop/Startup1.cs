@@ -4,17 +4,14 @@ using Microsoft.Owin;
 using Owin;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Cookies;
+using Step.Identity.Manager;
+using Step.Identity.Model;
+using Step.Identity.Store;
 [assembly: OwinStartup(typeof(Fshop.Startup1))]
 namespace Fshop
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.Owin.Security.Cookies;
-    using Step.Identity.Manager;
-    using Step.Identity.Model;
-    using Step.Identity.Store;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Web;
     using AppFunc = Func<IDictionary<string, object>, Task>;
     public class Startup1
     {
