@@ -43,6 +43,7 @@ namespace Fshop.Controllers
                 }
                 else
                 {
+                    
                     Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
                     p.Price = EditedProduct.Price;
                     p.Name = EditedProduct.Name;
