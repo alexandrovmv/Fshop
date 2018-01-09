@@ -18,7 +18,7 @@ namespace Fshop.Models
         {
             get
             {
-                
+                Console.WriteLine();
                 double cost = 0;
                 foreach(CartItem item in Check)
                 {
