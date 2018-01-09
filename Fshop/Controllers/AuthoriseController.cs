@@ -92,7 +92,7 @@ namespace Fshop.Controllers
 
             GetAuthenticationManager().SignIn(identity);
             if (user != null){
-                if( user.Email == "a@gmail.com")
+                if( user.Roles.FirstOrDefault(x=>x.RoleId==1)!=null)
                 {
                     return RedirectToAction("Index", "Admin");
                 }

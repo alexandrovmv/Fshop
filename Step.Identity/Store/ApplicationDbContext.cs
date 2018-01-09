@@ -26,23 +26,23 @@ namespace Step.Identity.Store
                 var roleGreo = new AppRole { Name = "AppGreo" };
                 await manager.CreateAsync(roleGreo);
             }
-            if (!context.Users.Any(u => u.UserName == "dimka@gmail.com"))
+            if (!context.Users.Any(u => u.UserName == "amv@gmail.com"))
             {
                 var store = new CustomUserStore(context);
                 var manager = new ApplicationUserManager(store);
                 var user = new AppUser
                 {
-                    FirstName="Dmitry", LastName="Chumak",
-                    UserName = "dimka@gmail.com",
+                    FirstName="Mikhail", LastName="Alexandrov",
+                    UserName = "amv@gmail.com",
                     SubdivisionId = 0,
-                    Email = "dimka@gmail.com",
+                    Email = "amv@gmail.com",
                     EmailConfirmed = true,
                     PhoneNumber = "0123456789",
                     PhoneNumberConfirmed = true
                 };
                
 
-                await manager.CreateAsync(user, "Qwerty123_");
+                await manager.CreateAsync(user, "amv@gmail.com");
 
             
 
@@ -114,7 +114,7 @@ namespace Step.Identity.Store
     {
        
         public ApplicationDbContext()
-            : base()
+            : base("name=IdentityAzure")
         {
             if (!Database.Exists())
             {
