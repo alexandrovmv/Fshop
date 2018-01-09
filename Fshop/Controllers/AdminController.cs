@@ -21,6 +21,10 @@ namespace Fshop.Controllers
       
         public ActionResult Index(int Page=1, int ProdOnPage=3)
         {
+            if (!User.IsInRole("AppAdmin"))
+            {
+                return RedirectToAction("Index", "Product");
+            }
             IEnumerable<FShop.DB.DB.Product> products = repository.Products.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
             ViewBag.Page = Page;
             ViewBag.Count = Math.Ceiling((decimal)repository.Products.Count() / ProdOnPage);
@@ -59,25 +63,10 @@ namespace Fshop.Controllers
         public ActionResult AddProduct()
         {
             int newId = repository.Products[repository.Products.Count-1].ProductID + 1;
+            
             return RedirectToAction("Edit",new { id = newId});
         }
-        //[HttpPost]
-        //public ActionResult AddProduct(Product NewProduct)
-        //{
 
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
-        //        p.Price = EditedProduct.Price;
-        //        p.Name = EditedProduct.Name;
-        //        p.Photo = EditedProduct.Photo;
-        //        p.Description = EditedProduct.Description;
-        //        p.Category = EditedProduct.Category;
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(EditedProduct);
-        //}
 
 
         public PartialViewResult GetProductList(int Page = 1, int ProdOnPage = 5)
