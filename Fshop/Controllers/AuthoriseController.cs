@@ -87,11 +87,11 @@ namespace Fshop.Controllers
             }
 
             var user = userManager.Find(model.Email, model.Password);
-            var identity = userManager.CreateIdentity(
-                         user, DefaultAuthenticationTypes.ApplicationCookie);
-
-            GetAuthenticationManager().SignIn(identity);
+         
             if (user != null){
+                var identity = userManager.CreateIdentity(
+                         user, DefaultAuthenticationTypes.ApplicationCookie);
+                GetAuthenticationManager().SignIn(identity);
                 if( user.Roles.FirstOrDefault(x=>x.RoleId==1)!=null)
                 {
                     return RedirectToAction("Index", "Admin");
@@ -100,13 +100,18 @@ namespace Fshop.Controllers
                 {
                     return RedirectToAction("Index", "Product");
                 }
-              
+                return View(model);
             }
-            
-            ModelState.AddModelError("", "Invalid email or password");
-            return View(model);
-        }
 
+            return RedirectToAction("WrongLogin");
+           
+            
+        }
+        public ActionResult WrongLogin()
+        {
+
+            return View();
+        }
 
         private void SignIn(AppUser user)
         {
