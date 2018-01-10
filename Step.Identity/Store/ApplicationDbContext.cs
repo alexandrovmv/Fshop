@@ -114,7 +114,7 @@ namespace Step.Identity.Store
     {
        
         public ApplicationDbContext()
-            : base("name=IdentityAzure")
+            : base()
         {
             if (!Database.Exists())
             {
