@@ -29,8 +29,8 @@
         <td class="align-middle"><img class="card-img-top" src=@item.Photo alt="image" height="50"></td>
         <td class="align-middle">@item.Price</td>
         <td class="align-middle" >
-                @Html.RouteLink("Delete",new { controller = "Product",action="Remove", id=item.ProductID }, new { @class = "btn btn-danger btn-edit", style ="min-width:100px; margin-bottom:10px;" })
-                @Html.RouteLink("Edit", new { controller = "Product", action = "Edit", id = item.ProductID }, new { @class = " btn btn-warning btn-edit", style = "min-width:100px" })
+                @Html.RouteLink("Delete",new { controller = "Admin",action="Remove", id=item.ProductID }, new { @class = "btn btn-danger btn-edit", style ="min-width:100px; margin-bottom:10px;" })
+                @Html.RouteLink("Edit", new { controller = "Admin", action = "Edit", id = item.ProductID }, new { @class = " btn btn-warning btn-edit", style = "min-width:100px" })
         </td>
     </tr>
 }
