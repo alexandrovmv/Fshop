@@ -43,13 +43,13 @@ namespace Fshop.Controllers
             int count = 0;
             if (!string.IsNullOrEmpty(ProdType))
             {
-                count = repository.Products.Where(x => x.Category == ProdType).Count();
-                products = repository.Products.Where(x =>x.Category == ProdType).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+                count = repository.Prod.Where(x => x.Category == ProdType).Count();
+                products = repository.Prod.Where(x =>x.Category == ProdType).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
             }
             else
             {
-                count = repository.Products.Count();
-                products = repository.Products.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+                count = repository.Prod.Count();
+                products = repository.Prod.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
 
             }
             ViewBag.Count = Math.Ceiling((decimal)count/ProdOnPage);
@@ -115,7 +115,7 @@ namespace Fshop.Controllers
                     CurrentCart.Check.Add(
                         new CartItem
                         {
-                            product = repository.Products.FirstOrDefault(x => x.ProductID == prodId),
+                            product = repository.Prod.FirstOrDefault(x => x.ProductID == prodId),
                             Count = 1
                         });
                 }
@@ -146,13 +146,14 @@ namespace Fshop.Controllers
             int count = 0;
             if (!string.IsNullOrEmpty(ProdType))
             {
-                count = repository.Products.Where(x => x.Category == ProdType).Count();
-                products = repository.Products.Where(x => x.Category == ProdType).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+                count = repository.Prod.Where(x => x.Category == ProdType).Count();
+               
+                products = (repository.Prod.Where(x => x.Category == ProdType).ToList()).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
             }
             else
             {
-                count = repository.Products.Count();
-                products = repository.Products.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+                count = repository.Prod.Count();
+                products = (repository.Prod.ToList()).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
 
             }
             ViewBag.Count = Math.Ceiling((decimal)count / ProdOnPage);

@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FShop.DB.DB;
+using System.Data.Entity;
 
 namespace FShop.DB
 {
     public class ProductRepository : IProductRepository
     {
-        FShopContext context = new FShopContext();
-
+        static FShopContext context = new FShopContext();
+        static DbSet<Product> Prods { get; set; }
+        public DbSet<Product> Prod { get { return context.Product; } }
         static List<Product> prod;
         public ProductRepository()
         {
+           
             if(prod==null)
                 prod = context.Product.ToList();
         }
@@ -25,6 +28,11 @@ namespace FShop.DB
             }
         }
 
-        
+        public void SaveChanges()
+        {
+
+            context.SaveChanges();
+            
+        }
     }
 }

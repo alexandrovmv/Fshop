@@ -25,14 +25,14 @@ namespace Fshop.Controllers
             {
                 return RedirectToAction("Index", "Product");
             }
-            IEnumerable<FShop.DB.DB.Product> products = repository.Products.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+            IEnumerable<FShop.DB.DB.Product> products = (repository.Prod.ToList()).Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
             ViewBag.Page = Page;
-            ViewBag.Count = Math.Ceiling((decimal)repository.Products.Count() / ProdOnPage);
+            ViewBag.Count = Math.Ceiling((decimal)repository.Prod.Count() / ProdOnPage);
             return View(products);
         }
         public ActionResult Edit(int id)
         {
-            Product p = repository.Products.FirstOrDefault(x => x.ProductID == id);
+            Product p = repository.Prod.FirstOrDefault(x => x.ProductID == id);
             if (p == null) p = new Product { ProductID = id };
             return View(p);
         }
@@ -41,28 +41,28 @@ namespace Fshop.Controllers
         {        
             if (ModelState.IsValid)
             {
-                if (EditedProduct.ProductID > repository.Products.Last().ProductID)
+                if (EditedProduct.ProductID > repository.Prod.Max(x=>x.ProductID))
                 {
-                    repository.Products.Add(EditedProduct);
+                    repository.Prod.Add(EditedProduct);
+                    
                 }
                 else
                 {
-                    
-                    Product p = repository.Products.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
+                    Product p = repository.Prod.FirstOrDefault(x => x.ProductID == EditedProduct.ProductID);
                     p.Price = EditedProduct.Price;
                     p.Name = EditedProduct.Name;
                     p.Photo = EditedProduct.Photo;
                     p.Description = EditedProduct.Description;
                     p.Category = EditedProduct.Category;
                 }
-               
+                repository.SaveChanges();
                 return RedirectToAction("index");
             }
             return View(EditedProduct);
         }
         public ActionResult AddProduct()
         {
-            int newId = repository.Products[repository.Products.Count-1].ProductID + 1;
+            int newId = repository.Prod.Max(x=> x.ProductID) + 1;
             
             return RedirectToAction("Edit",new { id = newId});
         }
@@ -78,8 +78,8 @@ namespace Fshop.Controllers
             IEnumerable<FShop.DB.DB.Product> products;
             int count = 0;
      
-             count = repository.Products.Count();
-             products = repository.Products.Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
+             count = repository.Prod.Count();
+             products = repository.Prod.ToList().Skip((Page - 1) * ProdOnPage).Take(ProdOnPage);
 
             ViewBag.Count = Math.Ceiling((decimal)count / ProdOnPage);
 
@@ -93,8 +93,9 @@ namespace Fshop.Controllers
 
             if (ModelState.IsValid)
             {
-                Product p = repository.Products.FirstOrDefault(x => x.ProductID == id);
-                repository.Products.Remove(p);
+                Product p = repository.Prod.FirstOrDefault(x => x.ProductID == id);
+                repository.Prod.Remove(p);
+                repository.SaveChanges();
                 return RedirectToAction("Index"/*,new { id = (int)Session["page"]}*/);
             }
             else

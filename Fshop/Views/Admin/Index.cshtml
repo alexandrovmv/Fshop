@@ -36,7 +36,7 @@
         @Ajax.ActionLink("30", "GetProductList", "Admin", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 30 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
         @Ajax.ActionLink("40", "GetProductList", "Admin", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 40 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; " })
         @Ajax.ActionLink("50", "GetProductList", "Admin", new { ProdType = ViewBag.ProdType, Page = ViewBag.Page, ProdOnPage = 50 }, options, new { @class = "btn btn-info btn-lg", @style = "min-width:60px; border-top-right-radius:50px " })
-        
+        @Html.ActionLink("NEW", "AddProduct","Admin")
         <div>
             <div class="row" id="product_list">
                 @Html.Action("GetProductList")
